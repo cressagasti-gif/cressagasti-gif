@@ -13,6 +13,50 @@ RED = "#FF2D2D"
 RED_HI = "#FFD9D9"
 BG = "#0D0D0D"
 
+# ------------------------------------------- fuente pixel 5x7 (cuadrada)
+# Cada glifo es 5 columnas x 7 filas. "#" = pixel encendido.
+# Se usa para dibujar el nombre encima de la lluvia matrix.
+FONT57 = {
+    "A": (".###.", "#...#", "#...#", "#####", "#...#", "#...#", "#...#"),
+    "B": ("####.", "#...#", "#...#", "####.", "#...#", "#...#", "####."),
+    "C": (".###.", "#...#", "#....", "#....", "#....", "#...#", ".###."),
+    "D": ("####.", "#...#", "#...#", "#...#", "#...#", "#...#", "####."),
+    "E": ("#####", "#....", "#....", "####.", "#....", "#....", "#####"),
+    "G": (".###.", "#...#", "#....", "#.###", "#...#", "#...#", ".###."),
+    "K": ("#...#", "#..#.", "#.#..", "##...", "#.#..", "#..#.", "#...#"),
+    "N": ("#...#", "##..#", "#.#.#", "#..##", "#...#", "#...#", "#...#"),
+    "O": (".###.", "#...#", "#...#", "#...#", "#...#", "#...#", ".###."),
+    "R": ("####.", "#...#", "#...#", "####.", "#.#..", "#..#.", "#...#"),
+    "S": (".####", "#....", "#....", ".###.", "....#", "....#", "####."),
+    "T": ("#####", "..#..", "..#..", "..#..", "..#..", "..#..", "..#.."),
+    "8": (".###.", "#...#", "#...#", ".###.", "#...#", "#...#", ".###."),
+    "9": (".###.", "#...#", "#...#", ".####", "....#", "....#", ".###."),
+    "0": (".###.", "#...#", "#..##", "#.#.#", "##..#", "#...#", ".###."),
+    " ": (".....", ".....", ".....", ".....", ".....", ".....", "....."),
+}
+
+
+def pixel_text(text, x, y, px, color, opacity="1"):
+    """Dibuja `text` con la fuente 5x7. Cada pixel es un cuadrado de px.
+    Devuelve el ancho total ocupado."""
+    adv = 6 * px                      # 5 de glifo + 1 de separacion
+    total = adv * len(text) - px
+    out = [f'<g fill="{color}" fill-opacity="{opacity}">']
+    for i, ch in enumerate(text.upper()):
+        glyph = FONT57.get(ch)
+        if not glyph:
+            continue
+        ox = x + i * adv
+        for row, line in enumerate(glyph):
+            for col, cell in enumerate(line):
+                if cell == "#":
+                    out.append(
+                        f'<rect x="{ox + col * px}" y="{y + row * px}" '
+                        f'width="{px}" height="{px}"/>'
+                    )
+    out.append("</g>")
+    return "".join(out), total
+
 
 # ---------------------------------------------------------------- matrix rain
 def matrix_rain():
@@ -60,6 +104,37 @@ def matrix_rain():
             op = "" if head else ' opacity=".9"'
             p.append(f'<text x="{x}" y="{j * STEP}" fill="{fill}"{op}>{esc(c)}</text>')
         p.append("</g>")
+
+    # ---- nombre en pixelado cuadrado, con la lluvia DETRAS ----
+    NAME = "GASTON"
+    PX = 9                            # lado de cada pixel
+    GLYPH_H = 7 * PX
+    total_w = 6 * PX * len(NAME) - PX
+    x0 = (W - total_w) / 2
+    y0 = (H - GLYPH_H) / 2
+    pad_x, pad_y = 26, 16
+
+    # fondo semitransparente: la lluvia sigue viéndose detras, atenuada
+    p.append(
+        f'<rect x="{x0 - pad_x:.0f}" y="{y0 - pad_y:.0f}" '
+        f'width="{total_w + pad_x * 2:.0f}" height="{GLYPH_H + pad_y * 2:.0f}" '
+        f'rx="10" fill="{BG}" fill-opacity=".72"/>'
+    )
+    # borde sutil del panel
+    p.append(
+        f'<rect x="{x0 - pad_x:.0f}" y="{y0 - pad_y:.0f}" '
+        f'width="{total_w + pad_x * 2:.0f}" height="{GLYPH_H + pad_y * 2:.0f}" '
+        f'rx="10" fill="none" stroke="{RED}" stroke-opacity=".35" '
+        f'stroke-width="1.5"/>'
+    )
+    # el nombre: glow + pulso suave de opacidad
+    p.append(
+        '<g style="filter:drop-shadow(0 0 7px rgba(255,45,45,.75))">'
+        '<animate attributeName="opacity" values="1;1;.78;1" dur="5s" '
+        'keyTimes="0;0.4;0.55;1" repeatCount="indefinite"/>'
+    )
+    p.append(pixel_text(NAME, x0, y0, PX, RED)[0])
+    p.append("</g>")
 
     p.append("</svg>")
     with open(os.path.join(OUT, "matrix-rain.svg"), "w", encoding="utf-8") as f:
