@@ -51,13 +51,13 @@
 </p>
 
 <p align="center">
-  <img height="30" src="https://img.shields.io/badge/Power+BI-FF2D2D?style=for-the-badge&labelColor=0D0D0D&logo=powerbi&logoColor=0D0D0D" alt="Power BI" />
-  <img height="30" src="https://img.shields.io/badge/SQL-FF2D2D?style=for-the-badge&labelColor=0D0D0D&logo=postgresql&logoColor=0D0D0D" alt="SQL" />
-  <img height="30" src="https://img.shields.io/badge/C-FF2D2D?style=for-the-badge&labelColor=0D0D0D" alt="C" />
-  <img height="30" src="https://img.shields.io/badge/Excel-FF2D2D?style=for-the-badge&labelColor=0D0D0D&logo=microsoftexcel&logoColor=0D0D0D" alt="Excel" />
-  <img height="30" src="https://img.shields.io/badge/DAX-FF2D2D?style=for-the-badge&labelColor=0D0D0D" alt="DAX" />
-  <img height="30" src="https://img.shields.io/badge/Power+Query-FF2D2D?style=for-the-badge&labelColor=0D0D0D&logo=powerbi&logoColor=0D0D0D" alt="Power Query" />
-  <img height="30" src="https://img.shields.io/badge/Jupyter-FF2D2D?style=for-the-badge&labelColor=0D0D0D&logo=jupyter&logoColor=0D0D0D" alt="Jupyter" />
+  <img height="30" src="https://img.shields.io/badge/Power%20BI-FF2D2D?style=for-the-badge&labelColor=FF2D2D&logo=powerbi&logoColor=0D0D0D" alt="Power BI" />
+  <img height="30" src="https://img.shields.io/badge/SQL-FF2D2D?style=for-the-badge&labelColor=FF2D2D&logo=postgresql&logoColor=0D0D0D" alt="SQL" />
+  <img height="30" src="https://img.shields.io/badge/C-FF2D2D?style=for-the-badge&labelColor=FF2D2D" alt="C" />
+  <img height="30" src="https://img.shields.io/badge/Excel-FF2D2D?style=for-the-badge&labelColor=FF2D2D&logo=microsoftexcel&logoColor=0D0D0D" alt="Excel" />
+  <img height="30" src="https://img.shields.io/badge/DAX-FF2D2D?style=for-the-badge&labelColor=FF2D2D" alt="DAX" />
+  <img height="30" src="https://img.shields.io/badge/Power%20Query-FF2D2D?style=for-the-badge&labelColor=FF2D2D&logo=powerbi&logoColor=0D0D0D" alt="Power Query" />
+  <img height="30" src="https://img.shields.io/badge/Jupyter-FF2D2D?style=for-the-badge&labelColor=FF2D2D&logo=jupyter&logoColor=0D0D0D" alt="Jupyter" />
 </p>
 
 <p align="center">
@@ -109,6 +109,28 @@
 ---
 
 ## 📂 Projects
+
+### ⭐ Featured · Team Project
+
+<p align="left">
+  <a href="https://github.com/Millocba/practicaprof">
+    <img height="26" src="https://img.shields.io/badge/%F0%9F%9A%80%20Millocba%2Fpracticaprof-FF2D2D?style=for-the-badge&labelColor=0D0D0D" alt="Millocba/practicaprof">
+  </a>
+  <img height="26" src="https://img.shields.io/badge/Python-FF2D2D?style=flat-square&labelColor=0D0D0D" alt="Python">
+  <img height="26" src="https://img.shields.io/badge/Jupyter-FF2D2D?style=flat-square&labelColor=0D0D0D" alt="Jupyter">
+  <img height="26" src="https://img.shields.io/badge/Team%20project-FF2D2D?style=flat-square&labelColor=0D0D0D" alt="Team project">
+</p>
+
+**Fleet data analysis & auditing system** — academic collaborative project covering the full data lifecycle: generation, quality, cleaning, integration, exploratory analysis, visualisation and anomaly detection.
+
+- 🧩 **Team project** — built with the [Millocba](https://github.com/Millocba) collective, not a solo repo
+- 🐍 Python + Jupyter Notebook, reproducible with configurable random seeds
+- 🎯 Deliberately injected anomalies with evaluation labels kept separate from the data given to the models
+- 📊 An end-to-end auditable and defensible analytical process, not just a dashboard
+
+[→ See the repository](https://github.com/Millocba/practicaprof)
+
+### Other Projects
 
 | Repository | Description |
 |---|---|
