@@ -31,10 +31,12 @@
 
 <table>
   <tr>
-    <td width="270" valign="top" align="center">
-      <img src="./assets/profile-card.svg" width="270" alt="Perfil de Gastón Cressa" />
+    <td align="center" valign="top">
+
+      <img src="./assets/profile-card.svg" width="250" alt="Perfil de Gastón Cressa" />
+
     </td>
-    <td valign="top">
+    <td valign="top" width="99%">
 
 ## 👨‍💻 About Me
 
