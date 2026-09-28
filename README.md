@@ -169,14 +169,9 @@
 
 ---
 
-```text
-███╗    ██╗     ████████╗  ██████╗    ██████╗
-██╔══╝   ██║     ██╔═════╝  ██╔═══██╗  ██╔═══██╗
-██║  ██  ██║     ██████╗    ██║   ██║  ██║   ██║
-██║   █  ██║     ╚════██║   ██║   ██║  ██║   ██║
-██║   █  ██║     ██████║    ██║   ██║  ██████╔╝
-╚═╝   ╚  ╚═╝     ╚══════╝   ╚═╝   ╚═╝  ╚═════╝
-```
+<p align="center">
+  <img src="./assets/kurama.svg?v=3" width="300" alt="Kurama — nine tails" />
+</p>
 
 <p align="center">
   <sub>Matrix rain &amp; emblems: <code>gen_assets.py</code> · Cards: <a href="https://github.com/DenverCoder1/readme-typing-svg">readme-typing-svg</a> · <a href="https://github.com/anuraghazra/github-readme-stats">github-readme-stats</a> · <a href="https://github.com/DenverCoder1/github-readme-streak-stats">streak-stats</a> · <a href="https://github.com/tandpfun/skillicons">skillicons</a></sub>

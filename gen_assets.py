@@ -348,6 +348,93 @@ def rings_emblem():
         f.write(svg)
 
 
+def naruto_mark(cx, cy, r, color, dark):
+    """Kurama (九尾) estilizado: cabeza de zorro demonio + nueve colas.
+
+    Version ORIGINAL dibujada con paths (no es el artwork oficial de la
+    serie). Las 9 colas en abanico son lo que lo hace identificable.
+    """
+    import math
+
+    g = [f'<g stroke-linecap="round" stroke-linejoin="round">']
+
+    # ---- nueve colas en abanico, detras ----
+    n = 9
+    for i in range(n):
+        a = math.radians(186 + (i * 168 / (n - 1)))      # abanico amplio
+        r0, r1 = r * 0.95, r * 2.55
+        w0 = r * 0.30
+        p0 = (cx + math.cos(a) * r0 - math.sin(a) * w0,
+              cy + math.sin(a) * r0 + math.cos(a) * w0)
+        p1 = (cx + math.cos(a) * r1, cy + math.sin(a) * r1)
+        p2 = (cx + math.cos(a) * r0 + math.sin(a) * w0,
+              cy + math.sin(a) * r0 - math.cos(a) * w0)
+        col = dark if i % 2 else color
+        op = ".5" if i % 2 else ".75"
+        g.append(
+            f'<path d="M{p0[0]:.1f} {p0[1]:.1f} L{p1[0]:.1f} {p1[1]:.1f} '
+            f'L{p2[0]:.1f} {p2[1]:.1f} Z" fill="{col}" fill-opacity="{op}"/>'
+        )
+
+    # ---- cabeza de zorro ----
+    # orejas puntiagudas
+    for sx in (-1, 1):
+        g.append(
+            f'<path d="M{cx + sx * r * 0.10:.1f} {cy - r * 0.52:.1f} '
+            f'L{cx + sx * r * 0.66:.1f} {cy - r * 1.02:.1f} '
+            f'L{cx + sx * r * 0.30:.1f} {cy - r * 0.30:.1f} Z" '
+            f'fill="{color}"/>'
+        )
+    # craneo / mejillas
+    g.append(
+        f'<path d="M{cx - r * 0.52:.1f} {cy - r * 0.34:.1f} '
+        f'L{cx - r * 0.30:.1f} {cy - r * 0.58:.1f} '
+        f'L{cx:.1f} {cy - r * 0.44:.1f} '
+        f'L{cx + r * 0.30:.1f} {cy - r * 0.58:.1f} '
+        f'L{cx + r * 0.52:.1f} {cy - r * 0.34:.1f} '
+        f'L{cx + r * 0.30:.1f} {cy + r * 0.46:.1f} '
+        f'L{cx:.1f} {cy + r * 0.66:.1f} '
+        f'L{cx - r * 0.30:.1f} {cy + r * 0.46:.1f} Z" fill="{color}"/>'
+    )
+    # ojos
+    for sx in (-1, 1):
+        g.append(
+            f'<path d="M{cx + sx * r * 0.10:.1f} {cy - r * 0.18:.1f} '
+            f'L{cx + sx * r * 0.38:.1f} {cy - r * 0.06:.1f} '
+            f'L{cx + sx * r * 0.10:.1f} {cy + r * 0.06:.1f} Z" '
+            f'fill="#0D0D0D"/>'
+        )
+    # colmillos
+    for sx in (-1, 1):
+        g.append(
+            f'<path d="M{cx + sx * r * 0.16:.1f} {cy + r * 0.30:.1f} '
+            f'L{cx + sx * r * 0.26:.1f} {cy + r * 0.54:.1f} '
+            f'L{cx + sx * r * 0.06:.1f} {cy + r * 0.36:.1f} Z" '
+            f'fill="#0D0D0D"/>'
+        )
+    g.append("</g>")
+    return "".join(g)
+
+
+def naruto_footer():
+    """Kurama + 'NARUTO' en la fuente pixel, para el pie del perfil."""
+    W, H = 300, 190
+    p = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+        f'width="{W}" height="{H}" role="img" aria-label="Kurama, nine tails">',
+        '<style>.g{filter:drop-shadow(0 0 9px rgba(255,45,45,.65))}</style>',
+        f'<g class="g">{naruto_mark(150, 82, 30, RED, "#8E1A1A")}</g>',
+    ]
+    px = 8
+    total = 6 * px * len("NARUTO") - px
+    p.append(pixel_text("NARUTO", (W - total) / 2, 136, px, RED)[0])
+    p.append("</svg>")
+    svg = "".join(p)
+    with open(os.path.join(OUT, "kurama.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+    return len(svg)
+
+
 def to_binary(text):
     """Codifica el texto a binario ASCII, 8 bits por caracter."""
     return " ".join(
@@ -562,5 +649,6 @@ print(f"  profile-card.svg built ({profile_card()} bytes)")
 mangekyo()
 rings_emblem()
 linkedin_badge()
+print(f"  kurama.svg built ({naruto_footer()} bytes)")
 for f in sorted(os.listdir(OUT)):
     print(f"  {f:26} {os.path.getsize(os.path.join(OUT, f)):>7} bytes")
