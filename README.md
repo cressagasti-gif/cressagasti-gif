@@ -31,8 +31,8 @@
 
 <table>
   <tr>
-    <td width="300" valign="top" align="center">
-      <img src="./assets/profile-card.svg" width="300" alt="Perfil de Gastón Cressa" />
+    <td width="270" valign="top" align="center">
+      <img src="./assets/profile-card.svg" width="270" alt="Perfil de Gastón Cressa" />
     </td>
     <td valign="top">
 
