@@ -29,14 +29,7 @@
 
 ---
 
-<table>
-<tr>
-<td align="center" valign="top">
-
-<img src="./assets/profile-card.svg" width="250" alt="Perfil de Gastón Cressa" />
-
-</td>
-<td valign="top" width="99%">
+<img src="./assets/profile-card.svg" width="250" align="left" alt="Perfil de Gastón Cressa" />
 
 ## 👨‍💻 About Me
 
@@ -131,10 +124,6 @@
 ## 🎓 Education
 
 **Instituto Cervantes** — Data Science · Artificial Intelligence · Programming · Data Analysis
-
-</td>
-</tr>
-</table>
 
 ---
 
