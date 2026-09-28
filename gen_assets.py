@@ -204,8 +204,8 @@ def typewriter():
     FIXED = 5200         # ms que queda todo fijo antes de borrar
 
     # Frase que codifica el binario de la franja superior.
-    # "Sekai ni itami ore" = "ahora el mundo conocera el dolor" (JJK)
-    PHRASE = "Sekai ni itami ore"
+    # "Sekai ni itami o" = "ahora el mundo conocera el dolor" (JJK)
+    PHRASE = "Sekai ni itami o"
 
     lines = [
         "❯ whoami",
