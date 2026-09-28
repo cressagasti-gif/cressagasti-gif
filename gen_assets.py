@@ -118,10 +118,12 @@ def mangekyo():
         'stroke-linecap="round" opacity=".55">',
         '<circle cx="48" cy="48" r="45"/>',
         "</g>",
-        # almendra del ojo (fija) — abierta: mas ancha, menos alta
+        # almendra del ojo (fija) — abierta para que el iris (r=19) ENTRE
+        # dentro con 5px de margen. Con control y=33 el medio-alto daba
+        # 11.25px y el iris se salia 7.75px. Con control y=16 da 24px.
         '<g class="e" fill="none" stroke="#FF2D2D" stroke-width="3" '
         'stroke-linecap="round" stroke-linejoin="round">',
-        '<path d="M11 48 C30 33 66 33 85 48 C66 63 30 63 11 48 Z" '
+        '<path d="M11 48 C30 16 66 16 85 48 C66 80 30 80 11 48 Z" '
         'fill="rgba(255,45,45,.10)"/>',
         '<circle cx="48" cy="48" r="19" fill="rgba(255,45,45,.18)"/>',
         "</g>",
