@@ -73,13 +73,16 @@
 
 <p align="center">
   <img
-    src="https://github-readme-stats-one-bice.vercel.app/api?username=cressagasti-gif&show_icons=true&theme=dark&hide_border=false&border_color=FF2D2D&border_radius=10&title_color=FF2D2D&icon_color=FF2D2D&ring_color=FF2D2D&stroke_color=FF2D2D&bg_color=0D0D0D&text_color=E6E6E6&count_private=true&include_all_commits=true&line_height=28"
-    width="49%"
+    src="https://github-readme-stats-one-bice.vercel.app/api?username=cressagasti-gif&show_icons=true&theme=dark&hide_border=false&border_color=FF2D2D&border_radius=10&title_color=FF2D2D&icon_color=FF2D2D&ring_color=FF2D2D&stroke_color=FF2D2D&bg_color=0D0D0D&text_color=E6E6E6&count_private=true&include_all_commits=true"
+    width="100%"
     alt="GitHub stats"
   />
+</p>
+
+<p align="center">
   <img
     src="https://github-readme-stats-one-bice.vercel.app/api/top-langs?username=cressagasti-gif&layout=compact&theme=dark&hide_border=false&border_color=FF2D2D&border_radius=10&title_color=FF2D2D&bg_color=0D0D0D&text_color=E6E6E6&langs_count=10"
-    width="32%"
+    width="100%"
     alt="Top languages"
   />
 </p>
