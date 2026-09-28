@@ -15,10 +15,7 @@
 </p>
 
 <p align="center">
-  <img
-    src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=21&pause=1200&color=FF2D2D&background=0D0D0D&center=true&multiline=true&vCenter=true&width=720&lines=%E2%9D%AF+whoami%3BGast%C3%B3n+Cressa%3B%E2%9D%AF+cat+~%2Fabout.json%3BIT+Technician+%2F+Programmer+%40+Syscom+Computers%3BC%C3%B3rdoba%2C+Argentina+%C2%B7+7+years+in+tech%3B%E2%9D%AF+ls+~%2Fstack%3Bpython+%C2%B7+C+%C2%B7+SQL+%C2%B7+power+bi+%C2%B7+excel+%C2%B7+git+%C2%B7+power+query%3B%E2%9D%AF+_"
-    alt="typing terminal intro"
-  />
+  <img src="./assets/terminal.svg" width="760" alt="typing terminal intro" />
 </p>
 
 <br>
