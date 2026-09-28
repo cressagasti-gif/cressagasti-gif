@@ -92,6 +92,8 @@ badge(
 
 # Sharingan Eterno (Mangekyou) — diseño original, 3 tomoe en pinwheel ANIMADO
 def mangekyo():
+    """Aro exterior igual que el shuriken y el ojo, para que los tres
+    emblemas de la fila queden simetricos. El iris gira, el aro no."""
     tomoe = (
         '<path d="M60.5 40.4 a7.2 7.2 0 1 0 0 15.2 '
         'c0-4.4-3.2-6.6-6.4-7.6 3.2-1 6.4-3.2 6.4-7.6 Z" '
@@ -104,12 +106,17 @@ def mangekyo():
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" '
         'height="96" role="img" aria-label="Eternal Mangekyo Sharingan">',
         '<style>.e{filter:drop-shadow(0 0 5px rgba(255,45,45,.55))}</style>',
+        # ---- aro exterior: identico al del shuriken y al del ojo ----
+        f'<g class="e" fill="none" stroke="{RED}" stroke-width="2" '
+        'stroke-linecap="round" opacity=".55">',
+        '<circle cx="48" cy="48" r="45"/>',
+        "</g>",
         # almendra del ojo (fija)
         '<g class="e" fill="none" stroke="#FF2D2D" stroke-width="3" '
         'stroke-linecap="round" stroke-linejoin="round">',
-        '<path d="M8 48 C28 25 68 25 88 48 C68 71 28 71 8 48 Z" '
+        '<path d="M16 48 C32 31 64 31 80 48 C64 65 32 65 16 48 Z" '
         'fill="rgba(255,45,45,.10)"/>',
-        '<circle cx="48" cy="48" r="21" fill="rgba(255,45,45,.18)"/>',
+        '<circle cx="48" cy="48" r="19" fill="rgba(255,45,45,.18)"/>',
         "</g>",
         # ---- grupo GIRATORIO: 3 tomoe en pinwheel, 120 grados entre si ----
         '<g class="e" stroke-linejoin="round">',
@@ -125,14 +132,15 @@ def mangekyo():
     p += [
         "</g>",
         # nucleo fijo (no gira) + reflejo del cristal
-        '<circle cx="48" cy="48" r="4.6" fill="#FFD9D9"/>',
-        '<circle cx="48" cy="48" r="7" fill="none" stroke="#FF2D2D" stroke-width="2.2"/>',
-        '<path d="M31 33 a20 20 0 0 1 13-8" fill="none" stroke="#FFD9D9" '
-        'stroke-width="2" stroke-linecap="round" opacity=".75"/>',
+        '<circle cx="48" cy="48" r="4.2" fill="#FFD9D9"/>',
+        '<circle cx="48" cy="48" r="6.4" fill="none" stroke="#FF2D2D" stroke-width="2"/>',
+        '<path d="M34 36 a17 17 0 0 1 11-7" fill="none" stroke="#FFD9D9" '
+        'stroke-width="1.8" stroke-linecap="round" opacity=".75"/>',
         "</g></svg>",
     ]
     with open(os.path.join(OUT, "emblem-mangekyo.svg"), "w", encoding="utf-8") as f:
         f.write("".join(p))
+
 
 # ojo / energia maldita
 badge(
@@ -147,61 +155,36 @@ badge(
 )
 
 
-# ------------------------------------------- terminal typewriter (ANIMADO)
-def uchiha_mark(cx, cy, r, color):
-    """Emblema del clan Uchiha (扇 / ougi).
-
-    Redibujado desde cero con curvas Bézier: circulo doble, tres plumas
-    del abanico con la punta hacia arriba y la base al centro, mas el
-    travesano y el mango inferior. Es una aproximacion geometrica propia,
-    no el logo oficial de la serie.
-    """
-    r2 = r * 0.86                                   # circulo interior
-    bx, by = cx, cy + r * 0.26                       # base de las plumas
+# ------------------------------------- anillos concentricos (franja terminal)
+def concentric_mark(cx, cy, r, color):
+    """Serie de circulos concentricos que se achican hacia adentro,
+    con un punto solido al centro como pupila. Mismo radio exterior que
+    usaba el emblema anterior, asi la franja no cambia de alto."""
     g = [
-        f'<g stroke="{color}" fill="none" stroke-linecap="round" '
-        f'stroke-linejoin="round">',
-        # aro exterior
-        f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.1f}" stroke-width="2.4"/>',
-        # aro interior
-        f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r2:.1f}" '
-        f'stroke-width="1.1" opacity=".55"/>',
+        f'<g fill="none" stroke="{color}" stroke-width="1.7">',
     ]
-
-    # tres plumas del abanico, centradas en -26, 0, +26 grados
-    for ang, span_ in ((-27, 0.86), (0, 1.0), (27, 0.86)):
-        import math
-        a = math.radians(ang - 90)                   # 0 = hacia arriba
-        tipx = cx + math.cos(a) * r * 0.70 * span_
-        tipy = by + math.sin(a) * r * 0.70 * span_
-        # semiancho de la pluma en la base
-        bw = r * 0.20 * span_
-        nx, ny = -math.sin(a), math.cos(a)
-        p0 = (bx + nx * bw, by - ny * bw)
-        p1 = (bx - nx * bw, by + ny * bw)
-        # curvas de control:，开口 hacia afuera, leve里面有 concavidad
-        c0 = (bx + nx * bw * 1.1, by - ny * bw * 1.1)
+    # anillos de radio decreciente
+    for k, (f, op) in enumerate(
+        ((1.00, "1"), (0.78, ".75"), (0.58, ".58"), (0.40, ".45"), (0.24, ".35"))
+    ):
         g.append(
-            f'<path d="M{p0[0]:.1f} {p0[1]:.1f} '
-            f'Q{c0[0]:.1f} {c0[1]:.1f} {tipx:.1f} {tipy:.1f} '
-            f'Q{(bx - nx * bw * 0.2):.1f} {(by - r * 0.30 * span_):.1f} '
-            f'{p1[0]:.1f} {p1[1]:.1f} Z" '
-            f'fill="{color}" fill-opacity=".20" stroke-width="1.6"/>'
+            f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r * f:.1f}" '
+            f'opacity="{op}"/>'
         )
-
-    # travesano horizontal
-    g.append(
-        f'<path d="M{cx - r * 0.66:.1f} {by + r * 0.10:.1f} '
-        f'h{r * 1.32:.1f}" stroke-width="2"/>'
-    )
-    # mango
-    g.append(
-        f'<path d="M{cx - r * 0.14:.1f} {by + r * 0.10:.1f} '
-        f'v{r * 0.40:.1f} h{r * 0.28:.1f} v{-r * 0.40:.1f}" '
-        f'stroke-width="1.8"/>'
-    )
     g.append("</g>")
+    # pupila
+    g.append(
+        f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r * 0.11:.1f}" '
+        f'fill="{color}"/>'
+    )
     return "".join(g)
+
+
+def to_binary(text):
+    """Codifica el texto a binario ASCII, 8 bits por caracter."""
+    return " ".join(
+        f"{ord(c):08b}" if c != " " else "00100000" for c in text
+    )
 
 
 def typewriter():
@@ -219,6 +202,10 @@ def typewriter():
     TYPING = 46          # ms por caracter
     PAUSE = 620          # ms de respiro entre lineas
     FIXED = 5200         # ms que queda todo fijo antes de borrar
+
+    # Frase que codifica el binario de la franja superior.
+    # "Sekai ni itami ore" = "ahora el mundo conocera el dolor" (JJK)
+    PHRASE = "Sekai ni itami ore"
 
     lines = [
         "❯ whoami",
@@ -260,11 +247,28 @@ def typewriter():
         f'<rect width="{W}" height="{H}" fill="{BG}"/>',
     ]
 
-    # ---- franja superior: emblema del clan + caracteres tipo matrix ----
-    p.append(uchiha_mark(48, CT, 15, RED))
+    # ---- franja superior: anillos + binario con significado ----
+    # "Sekai ni itami ore" = "ahora el mundo conocera el dolor" (Jujutsu Kaisen)
+    bits = to_binary(PHRASE)
+    x0 = 76
+    lane = W - x0 - PAD                          # ancho visible del marquee
+    # textLength fija el ancho exacto -> el loop del marquee no da saltos
+    one = lane * 2                               # ancho de una copia
+    p.append(concentric_mark(48, CT, 15, RED))
     p.append(
-        f'<text class="t2" x="76" y="{CT + 5}">'
-        '0110 1001 0110 0110 1001 0110 0110 1001 0110</text>'
+        f'<defs><clipPath id="mq">'
+        f'<rect x="{x0}" y="{CT - 13}" width="{lane}" height="26"/>'
+        f"</clipPath></defs>"
+    )
+    p.append(
+        f'<g clip-path="url(#mq)">'
+        f'<g><animateTransform attributeName="transform" type="translate" '
+        f'from="0 0" to="{-one:.1f} 0" dur="26s" repeatCount="indefinite"/>'
+        f'<text class="t2" x="{x0}" y="{CT + 5}" '
+        f'textLength="{one:.0f}" lengthAdjust="spacing">{esc(bits)}</text>'
+        f'<text class="t2" x="{x0 + one:.0f}" y="{CT + 5}" '
+        f'textLength="{one:.0f}" lengthAdjust="spacing">{esc(bits)}</text>'
+        f"</g></g>"
     )
     p.append(f'<path d="M{PAD} {CT + 24} h{W - PAD * 2}" stroke="#3D0A0A" '
              'stroke-width="1.5"/>')
