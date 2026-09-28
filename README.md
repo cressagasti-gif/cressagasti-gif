@@ -140,12 +140,12 @@
 
 | Repository | Description |
 |---|---|
-| **`USAF-DATA-ANALYSIS`** | Power BI project visualising data and tastes around USAF / Navy aviation. |
-| **`USAF-proyecto-IA-DATA-BASE`** | Python / notebook database with curated data on USAF aircraft models. |
-| **`Proyecto-POWER-BI`** | Sales analysis of electronics & home appliances by store and zone over time. |
-| **`F1-DATA-2`** | Python simulation of an F1 driver registry with statistics and wins. |
-| **`Proyecto-IA`** | Small artificial intelligence programming project. |
-| **`Proyecto-DATA`** | Data science project / relational database. |
+| **`argentina-real-estate-prices`** | End-to-end data science on Argentine property listings: cleaning, feature engineering, EDA and a linear-regression baseline (R² ≈ 0.27, reported with its limitations). |
+| **`aircraft-knowledge-base`** | Interactive Python knowledge base of USAF fighter aircraft with partial, case-insensitive search. |
+| **`f1-tire-degradation-prediction`** | Simple linear regression predicting F1 tyre wear per lap across a 71-lap race. |
+| **`f1-drivers-registry`** | In-memory SQLite registry of F1 drivers, their statistics and wins, queryable by team. |
+| **`powerbi-electronics-sales`** | Power BI report analysing electronics & home appliance sales by store and zone. |
+| **`usaf-fleet-powerbi`** | Power BI dashboard exploring the USAF fleet by generation, mission and worldwide base. |
 
 ---
 
@@ -161,9 +161,10 @@
 ## 📫 Let's connect
 
 <p align="center">
+  <a href="https://gaston-cressa.github.io/gaston-portfolio/"><img width="38" src="./assets/emblem-rings.svg?v=2" alt="" /> <img height="30" src="https://img.shields.io/badge/Portfolio-FF2D2D?style=for-the-badge&logo=github&logoColor=0D0D0D&labelColor=FF2D2D" alt="Portfolio" /></a>
   <a href="https://www.linkedin.com/in/gaston-cressa-9ba539250/"><img width="38" src="./assets/emblem-shuriken.svg?v=2" alt="" /> <img height="30" src="./assets/badge-linkedin.svg?v=2" alt="LinkedIn" /></a>
   <a href="https://www.instagram.com/gasti_98x/"><img width="38" src="./assets/emblem-mangekyo.svg?v=2" alt="" /> <img height="30" src="https://img.shields.io/badge/Instagram-FF2D2D?style=for-the-badge&logo=instagram&logoColor=0D0D0D&labelColor=FF2D2D" alt="Instagram" /></a>
-  <a href="https://github.com/cressagasti-gif"><img width="38" src="./assets/emblem-rings.svg?v=2" alt="" /> <img height="30" src="https://img.shields.io/badge/GitHub-FF2D2D?style=for-the-badge&logo=github&logoColor=0D0D0D&labelColor=FF2D2D" alt="GitHub" /></a>
+  <a href="https://github.com/cressagasti-gif"><img width="38" src="./assets/emblem-eye.svg?v=2" alt="" /> <img height="30" src="https://img.shields.io/badge/GitHub-FF2D2D?style=for-the-badge&logo=github&logoColor=0D0D0D&labelColor=FF2D2D" alt="GitHub" /></a>
 </p>
 
 ---
