@@ -41,7 +41,7 @@
 
 - 🔧 **IT Technician & Programmer at Syscom Computers** — technical support, PC repair and maintenance, OS installation, PC assembly, software installation and remote assistance.
 - 🌐 Also handle **basic networking and CCTV systems**, supporting customers with hardware and software solutions.
-- 🎓 Studied **Data Science, AI, Programming and Data Analysis** at Instituto Cervantes.
+- 🎓 Studied **Data Science, AI, Programming and Data Analysis** at Institución Cervantes, and **Telecommunications Engineering** at Universidad Blas Pascal.
 - 🌱 Currently pushing into **AI / Machine Learning** and applying my studies to real data problems.
 - 🚀 **Goal:** keep growing in tech and land a role where I can put my skills to work.
 
@@ -151,7 +151,10 @@
 
 ## 🎓 Education
 
-**Instituto Cervantes** — Data Science · Artificial Intelligence · Programming · Data Analysis
+| Institution | Program |
+|---|---|
+| **Institución Cervantes** | Data Science · Artificial Intelligence · Programming · Data Analysis |
+| **Universidad Blas Pascal** | Telecommunications Engineering *(Ingeniería en Telecomunicaciones)* |
 
 ---
 
