@@ -96,7 +96,11 @@ badge(
 # Sharingan Eterno (Mangekyou) — diseño original, 3 tomoe en pinwheel ANIMADO
 def mangekyo():
     """Aro exterior igual que el shuriken y el ojo, para que los tres
-    emblemas de la fila queden simetricos. El iris gira, el aro no."""
+    emblemas de la fila queden simetricos. El iris gira, el aro no.
+
+    La almendra va MAS ABIERTA (mas ancha y mas baja) para que el iris
+    quede centrado y proportionally igualado con los otros emblemas.
+    """
     tomoe = (
         '<path d="M60.5 40.4 a7.2 7.2 0 1 0 0 15.2 '
         'c0-4.4-3.2-6.6-6.4-7.6 3.2-1 6.4-3.2 6.4-7.6 Z" '
@@ -114,10 +118,10 @@ def mangekyo():
         'stroke-linecap="round" opacity=".55">',
         '<circle cx="48" cy="48" r="45"/>',
         "</g>",
-        # almendra del ojo (fija)
+        # almendra del ojo (fija) — abierta: mas ancha, menos alta
         '<g class="e" fill="none" stroke="#FF2D2D" stroke-width="3" '
         'stroke-linecap="round" stroke-linejoin="round">',
-        '<path d="M16 48 C32 31 64 31 80 48 C64 65 32 65 16 48 Z" '
+        '<path d="M11 48 C30 33 66 33 85 48 C66 63 30 63 11 48 Z" '
         'fill="rgba(255,45,45,.10)"/>',
         '<circle cx="48" cy="48" r="19" fill="rgba(255,45,45,.18)"/>',
         "</g>",
@@ -145,34 +149,23 @@ def mangekyo():
         f.write("".join(p))
 
 
-# ojo / energia maldita: PARPADEA (la almendra se aplasta como un parpadeo)
-# y la pupila se desplaza como si mirara alrededor
+# ojo / energia maldita: la pupila se mueve como si mirara alrededor
+# (sin parpadeo: al aplanar la almendra los circulos de dentro no desaparecian
+#  y se veía raro, asi que solo queda el movimiento de la pupila)
 _EYE = (
-    # almendra del ojo: se estira en Y -> se aplasta -> vuelve
+    # almendra del ojo (fija)
     '<path d="M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z" '
-    'fill="rgba(255,45,45,.14)">'
-    '<animate attributeName="d" '
-    'dur="6s" repeatCount="indefinite" '
-    'values="M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z;'
-    'M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z;'
-    'M12 48 C30 42 66 42 84 48 C66 54 30 54 12 48 Z;'
-    'M12 48 C30 42 66 42 84 48 C66 54 30 54 12 48 Z;'
-    'M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z" '
-    'keyTimes="0;0.42;0.46;0.50;1" calcMode="spline" '
-    'keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1;0 0 1 1"/>'
-    "</path>"
+    'fill="rgba(255,45,45,.14)"/>'
     # iris + pupila: miran de un lado a otro
     '<g><animateTransform attributeName="transform" type="translate" '
-    'values="-3 0; 3 0; -3 0" dur="6s" repeatCount="indefinite" '
-    'keyTimes="0;0.5;1"/>'
+    'values="-3.5 0; 3.5 0; -3.5 0" dur="6s" repeatCount="indefinite" '
+    'keyTimes="0;0.5;1" calcMode="spline" '
+    'keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>'
     '<circle cx="48" cy="48" r="13"/>'
     '<circle cx="48" cy="48" r="5" fill="none" stroke-width="2"/>'
     "</g>"
-    # reflejo del cristal: parpadea con el iris
-    '<path d="M40 26 C44 18 52 18 56 26" stroke-width="2" opacity=".8">'
-    '<animate attributeName="opacity" values=".8;.8;0;0;.8" dur="6s" '
-    'keyTimes="0;0.42;0.46;0.50;1" repeatCount="indefinite"/>'
-    "</path>"
+    # reflejo del cristal (fijo)
+    '<path d="M40 26 C44 18 52 18 56 26" stroke-width="2" opacity=".8"/>'
 )
 badge(
     "emblem-eye",
@@ -204,6 +197,24 @@ def concentric_mark(cx, cy, r, color):
         f'fill="{color}"/>'
     )
     return "".join(g)
+
+
+def rings_emblem():
+    """Los mismos anillos concentricos, pero como emblema 96x96 con aro
+    exterior igual que el shuriken, el sharingan y el ojo, para que la
+    fila de redes sociales quede simetrica."""
+    inner = concentric_mark(48, 48, 33, RED)
+    svg = (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" '
+        'height="96" role="img" aria-label="Concentric rings">'
+        '<style>.e{filter:drop-shadow(0 0 4px rgba(255,45,45,.45))}</style>'
+        f'<g class="e" fill="none" stroke="{RED}" stroke-width="2" '
+        f'stroke-linecap="round" opacity=".55">'
+        '<circle cx="48" cy="48" r="45"/></g>'
+        f"{inner}</svg>"
+    )
+    with open(os.path.join(OUT, "emblem-rings.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
 
 
 def to_binary(text):
@@ -403,5 +414,6 @@ print(f"  matrix-rain.svg built ({matrix_rain()} bytes)")
 print(f"  terminal.svg built ({typewriter()} bytes)")
 print(f"  profile-card.svg built ({profile_card()} bytes)")
 mangekyo()
+rings_emblem()
 for f in sorted(os.listdir(OUT)):
     print(f"  {f:26} {os.path.getsize(os.path.join(OUT, f)):>7} bytes")
