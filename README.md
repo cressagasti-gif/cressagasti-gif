@@ -7,15 +7,21 @@
     (ver gen_assets.py). GitHub los anima porque los referencia
     con ruta relativa y los sirve vía raw.githubusercontent.
   · Las tarjetas externas son SVG animadas de CDNs públicos.
+  ------------------------------------------------------------
+  IMPORTANTE: los assets llevan ?v=N al final de la URL.
+  GitHub cachea los SVG con raw.githubusercontent y NO los refresca
+  solo, asi que sin ese parametro seguirias viendo la version vieja
+  despues de regenerar los archivos. Al cambiar un asset, subir el
+  numero (v=2 -> v=3).
   ============================================================
 -->
 
 <p align="center">
-  <img src="./assets/matrix-rain.svg" width="100%" alt="Matrix rain" />
+  <img src="./assets/matrix-rain.svg?v=2" width="100%" alt="Matrix rain" />
 </p>
 
 <p align="center">
-  <img src="./assets/terminal.svg" width="760" alt="typing terminal intro" />
+  <img src="./assets/terminal.svg?v=2" width="760" alt="typing terminal intro" />
 </p>
 
 <br>
@@ -29,7 +35,7 @@
 
 ---
 
-<img src="./assets/profile-card.svg" width="250" align="left" alt="Perfil de Gastón Cressa" />
+<img src="./assets/profile-card.svg?v=2" width="250" align="left" alt="Perfil de Gastón Cressa" />
 
 ## 👨‍💻 About Me
 
@@ -61,9 +67,9 @@
 </p>
 
 <p align="center">
-  <img width="76" src="./assets/emblem-mangekyo.svg" alt="" />
-  <img width="76" src="./assets/emblem-shuriken.svg" alt="" />
-  <img width="76" src="./assets/emblem-eye.svg" alt="" />
+  <img width="76" src="./assets/emblem-mangekyo.svg?v=2" alt="" />
+  <img width="76" src="./assets/emblem-shuriken.svg?v=2" alt="" />
+  <img width="76" src="./assets/emblem-eye.svg?v=2" alt="" />
 </p>
 
 ---
@@ -152,9 +158,9 @@
 ## 📫 Let's connect
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/gaston-cressa-9ba539250/"><img width="38" src="./assets/emblem-shuriken.svg" alt="" /> <img height="30" src="./assets/badge-linkedin.svg" alt="LinkedIn" /></a>
-  <a href="https://www.instagram.com/gasti_98x/"><img width="38" src="./assets/emblem-mangekyo.svg" alt="" /> <img height="30" src="https://img.shields.io/badge/Instagram-FF2D2D?style=for-the-badge&logo=instagram&logoColor=0D0D0D&labelColor=FF2D2D" alt="Instagram" /></a>
-  <a href="https://github.com/cressagasti-gif"><img width="38" src="./assets/emblem-rings.svg" alt="" /> <img height="30" src="https://img.shields.io/badge/GitHub-FF2D2D?style=for-the-badge&logo=github&logoColor=0D0D0D&labelColor=FF2D2D" alt="GitHub" /></a>
+  <a href="https://www.linkedin.com/in/gaston-cressa-9ba539250/"><img width="38" src="./assets/emblem-shuriken.svg?v=2" alt="" /> <img height="30" src="./assets/badge-linkedin.svg?v=2" alt="LinkedIn" /></a>
+  <a href="https://www.instagram.com/gasti_98x/"><img width="38" src="./assets/emblem-mangekyo.svg?v=2" alt="" /> <img height="30" src="https://img.shields.io/badge/Instagram-FF2D2D?style=for-the-badge&logo=instagram&logoColor=0D0D0D&labelColor=FF2D2D" alt="Instagram" /></a>
+  <a href="https://github.com/cressagasti-gif"><img width="38" src="./assets/emblem-rings.svg?v=2" alt="" /> <img height="30" src="https://img.shields.io/badge/GitHub-FF2D2D?style=for-the-badge&logo=github&logoColor=0D0D0D&labelColor=FF2D2D" alt="GitHub" /></a>
 </p>
 
 ---
