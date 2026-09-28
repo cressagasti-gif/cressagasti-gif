@@ -152,7 +152,7 @@
 ## 📫 Let's connect
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/gaston-cressa-9ba539250/"><img width="38" src="./assets/emblem-shuriken.svg" alt="" /> <img height="30" src="https://img.shields.io/badge/LinkedIn-FF2D2D?style=for-the-badge&logo=linkedin&logoColor=0D0D0D&labelColor=FF2D2D" alt="LinkedIn" /></a>
+  <a href="https://www.linkedin.com/in/gaston-cressa-9ba539250/"><img width="38" src="./assets/emblem-shuriken.svg" alt="" /> <img height="30" src="./assets/badge-linkedin.svg" alt="LinkedIn" /></a>
   <a href="https://www.instagram.com/gasti_98x/"><img width="38" src="./assets/emblem-mangekyo.svg" alt="" /> <img height="30" src="https://img.shields.io/badge/Instagram-FF2D2D?style=for-the-badge&logo=instagram&logoColor=0D0D0D&labelColor=FF2D2D" alt="Instagram" /></a>
   <a href="https://github.com/cressagasti-gif"><img width="38" src="./assets/emblem-rings.svg" alt="" /> <img height="30" src="https://img.shields.io/badge/GitHub-FF2D2D?style=for-the-badge&logo=github&logoColor=0D0D0D&labelColor=FF2D2D" alt="GitHub" /></a>
 </p>

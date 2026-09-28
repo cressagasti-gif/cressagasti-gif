@@ -29,6 +29,8 @@ FONT57 = {
     "R": ("####.", "#...#", "#...#", "####.", "#.#..", "#..#.", "#...#"),
     "S": (".####", "#....", "#....", ".###.", "....#", "....#", "####."),
     "T": ("#####", "..#..", "..#..", "..#..", "..#..", "..#..", "..#.."),
+    ":": (".....", "..#..", "..#..", ".....", "..#..", "..#..", "....."),
+    ".": (".....", ".....", ".....", ".....", ".....", ".....", "..#.."),
     "8": (".###.", "#...#", "#...#", ".###.", "#...#", "#...#", ".###."),
     "9": (".###.", "#...#", "#...#", ".####", "....#", "....#", ".###."),
     "0": (".###.", "#...#", "#..##", "#.#.#", "##..#", "#...#", ".###."),
@@ -106,7 +108,7 @@ def matrix_rain():
         p.append("</g>")
 
     # ---- nombre en pixelado cuadrado, con la lluvia DETRAS ----
-    NAME = "GASTON"
+    NAME = "GASTON CRESSA: IT."
     PX = 9                            # lado de cada pixel
     GLYPH_H = 7 * PX
     total_w = 6 * PX * len(NAME) - PX
@@ -276,6 +278,45 @@ def concentric_mark(cx, cy, r, color):
     return "".join(g)
 
 
+def linkedin_badge():
+    """Badge de LinkedIn dibujado a mano.
+
+    shields.io ya no trae el icono de LinkedIn (lo sacaron de Simple
+    Icons por temas de marca), asi que el logo nunca renderizaba.
+    Replicamos el estilo for-the-badge: 28px de alto, fondo rojo, texto
+    blanco y logo oscuro, con el "in" dibujado con rectangulos.
+    """
+    H = 28
+    W = 106.0
+    S = 14.0 / 24.0                       # escala del logo 24x24 -> 14x14
+
+    # logo "in" en un viewBox 24x24, con rectangulos (estilo bloque)
+    logo = (
+        '<rect x="2" y="2" width="20" height="20" rx="2.5" fill="none" '
+        'stroke="#0D0D0D" stroke-width="2"/>'
+        '<circle cx="8.6" cy="7.9" r="1.9" fill="#0D0D0D"/>'
+        '<rect x="6.6" y="11.4" width="3.7" height="8.1" fill="#0D0D0D"/>'
+        '<rect x="12.5" y="11.4" width="8.4" height="3.5" fill="#0D0D0D"/>'
+        '<rect x="12.5" y="11.4" width="3.4" height="8.1" fill="#0D0D0D"/>'
+        '<rect x="17.5" y="14.0" width="3.4" height="5.5" fill="#0D0D0D"/>'
+    )
+
+    svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+        f'width="{W:.0f}" height="{H}" role="img" aria-label="LinkedIn">'
+        f'<title>LinkedIn</title>'
+        f'<rect width="{W:.0f}" height="{H}" fill="{RED}"/>'
+        f'<g transform="translate(9,7) scale({S:.4f})">{logo}</g>'
+        '<g fill="#ffffff" text-anchor="middle" '
+        'font-family="Verdana,Geneva,DejaVu Sans,sans-serif" '
+        'text-rendering="geometricPrecision" font-size="100">'
+        '<text transform="scale(.1)" x="620" y="175" textLength="620" '
+        'font-weight="bold">LINKEDIN</text></g></svg>'
+    )
+    with open(os.path.join(OUT, "badge-linkedin.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+
+
 def rings_emblem():
     """Los mismos anillos concentricos, pero como emblema 96x96 con aro
     exterior igual que el shuriken, el sharingan y el ojo, para que la
@@ -330,6 +371,7 @@ def typewriter():
         "❯ ls ~/stack",
         "python · C · SQL · power bi · excel · git · power query",
         "❯ _",
+        "神羅天征",
     ]
     n = len(lines)
     BAR = 34                          # alto de la franja del clan
@@ -356,6 +398,10 @@ def typewriter():
         f'font-size:{FS}px;font-weight:600;fill:{RED}}}'
         '.t2{font-family:ui-monospace,Consolas,monospace;font-size:15px;'
         f'fill:{RED};letter-spacing:3px;opacity:.75}}'
+        # kanji: hace falta una fuente CJK, si no el navegador pinta cuadritos
+        ".jp{font-family:'Yu Gothic','YuGothic','Meiryo','Hiragino Sans',"
+        "'Noto Sans CJK JP','Noto Sans JP','MS Gothic','MS Mincho',"
+        f"sans-serif;font-size:23px;font-weight:700;fill:{RED}}}"
         '.g{filter:drop-shadow(0 0 5px rgba(255,45,45,.45))}'
         "</style>",
         f'<rect width="{W}" height="{H}" fill="{BG}"/>',
@@ -388,6 +434,14 @@ def typewriter():
              'stroke-width="1.5"/>')
 
     top = TOP
+
+    def disp_w(s):
+        """Ancho en monospace. Los kanji ocupan 2 celdas, no 1."""
+        return sum(2 if ord(c) > 0x2E80 else 1 for c in s)
+
+    def is_cjk(s):
+        return any(ord(c) > 0x2E80 for c in s)
+
     # ---- lineas de la terminal: se revelan y se QUEDAN ----
     t0 = 0.0
     for i, ln in enumerate(lines):
@@ -401,11 +455,13 @@ def typewriter():
             f'keyTimes="0;{k_open:.5f};{k_done:.5f};{k_clear};1" '
             f'dur="{total}s" repeatCount="indefinite"/></rect></clipPath>'
         )
+        cls = ' class="jp"' if is_cjk(ln) else ""
         p.append(
-            f'<text x="{PAD}" y="{y:.0f}" clip-path="url(#k{i})">{esc(ln)}</text>'
+            f'<text{cls} x="{PAD}" y="{y:.0f}" '
+            f'clip-path="url(#k{i})">{esc(ln)}</text>'
         )
         # cursor blinking al final de la linea
-        cx = PAD + len(ln) * FS * 0.6
+        cx = PAD + disp_w(ln) * FS * 0.6
         p.append(
             f'<rect x="{cx:.0f}" y="{y - FS * 0.80:.0f}" width="{FS * 0.5:.0f}" '
             f'height="{FS * 0.84:.0f}" fill="{RED}" clip-path="url(#k{i})">'
@@ -492,5 +548,6 @@ print(f"  terminal.svg built ({typewriter()} bytes)")
 print(f"  profile-card.svg built ({profile_card()} bytes)")
 mangekyo()
 rings_emblem()
+linkedin_badge()
 for f in sorted(os.listdir(OUT)):
     print(f"  {f:26} {os.path.getsize(os.path.join(OUT, f)):>7} bytes")
