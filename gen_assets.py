@@ -68,25 +68,28 @@ def matrix_rain():
 
 
 # ---------------------------------------------------------------- emblemas
-def badge(name, body, label):
+def badge(name, body, label, anim=""):
     svg = (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" '
         f'height="96" role="img" aria-label="{label}">'
-        f'<g fill="none" stroke="{RED}" stroke-width="3" stroke-linecap="round" '
-        f'stroke-linejoin="round" filter="drop-shadow(0 0 4px rgba(255,45,45,.45))">'
-        f"{body}</g></svg>"
+        '<style>.e{filter:drop-shadow(0 0 4px rgba(255,45,45,.45))}</style>'
+        '<g class="e" fill="none" stroke="' + RED + '" stroke-width="3" '
+        'stroke-linecap="round" stroke-linejoin="round">'
+        f"{body}</g>{anim}</svg>"
     )
     with open(os.path.join(OUT, f"{name}.svg"), "w", encoding="utf-8") as f:
         f.write(svg)
 
 
-# estrella de ninja (4 puntas cóncavas) dentro de un aro
+# estrella de ninja (4 puntas cóncavas) que GIRA dentro de un aro fijo
 badge(
     "emblem-shuriken",
     '<circle cx="48" cy="48" r="45" stroke-width="2" opacity=".55"/>'
+    '<g><animateTransform attributeName="transform" type="rotate" '
+    'from="0 48 48" to="360 48 48" dur="7s" repeatCount="indefinite"/>'
     '<path d="M90 48 L57.2 57.2 L48 90 L38.8 57.2 L6 48 L38.8 38.8 L48 6 '
     'L57.2 38.8 Z" fill="rgba(255,45,45,.14)"/>'
-    '<circle cx="48" cy="48" r="7" fill="none"/>',
+    '<circle cx="48" cy="48" r="7" fill="none"/></g>',
     "Ninja star",
 )
 
@@ -142,15 +145,38 @@ def mangekyo():
         f.write("".join(p))
 
 
-# ojo / energia maldita
-badge(
-    "emblem-eye",
-    '<circle cx="48" cy="48" r="45" stroke-width="2" opacity=".55"/>'
+# ojo / energia maldita: PARPADEA (la almendra se aplasta como un parpadeo)
+# y la pupila se desplaza como si mirara alrededor
+_EYE = (
+    # almendra del ojo: se estira en Y -> se aplasta -> vuelve
     '<path d="M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z" '
-    'fill="rgba(255,45,45,.14)"/>'
+    'fill="rgba(255,45,45,.14)">'
+    '<animate attributeName="d" '
+    'dur="6s" repeatCount="indefinite" '
+    'values="M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z;'
+    'M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z;'
+    'M12 48 C30 42 66 42 84 48 C66 54 30 54 12 48 Z;'
+    'M12 48 C30 42 66 42 84 48 C66 54 30 54 12 48 Z;'
+    'M12 48 C28 26 68 26 84 48 C68 70 28 70 12 48 Z" '
+    'keyTimes="0;0.42;0.46;0.50;1" calcMode="spline" '
+    'keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1;0 0 1 1"/>'
+    "</path>"
+    # iris + pupila: miran de un lado a otro
+    '<g><animateTransform attributeName="transform" type="translate" '
+    'values="-3 0; 3 0; -3 0" dur="6s" repeatCount="indefinite" '
+    'keyTimes="0;0.5;1"/>'
     '<circle cx="48" cy="48" r="13"/>'
     '<circle cx="48" cy="48" r="5" fill="none" stroke-width="2"/>'
-    '<path d="M40 26 C44 18 52 18 56 26" stroke-width="2" opacity=".8"/>',
+    "</g>"
+    # reflejo del cristal: parpadea con el iris
+    '<path d="M40 26 C44 18 52 18 56 26" stroke-width="2" opacity=".8">'
+    '<animate attributeName="opacity" values=".8;.8;0;0;.8" dur="6s" '
+    'keyTimes="0;0.42;0.46;0.50;1" repeatCount="indefinite"/>'
+    "</path>"
+)
+badge(
+    "emblem-eye",
+    '<circle cx="48" cy="48" r="45" stroke-width="2" opacity=".55"/>' + _EYE,
     "Cursed eye",
 )
 
